@@ -6,6 +6,6 @@
 2. Commit
 3. Push
 
-## How to update from GitHub
+## How to get changes from GitHub
 
 1. Pull
