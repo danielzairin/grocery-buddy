@@ -1,11 +1,15 @@
 import React from "react";
+import GroceryList from "./GroceryList";
 import Pantry from "./Pantry";
+import Recipes from "./Recipes";
 
 function App() {
   return (
     <div>
-      <h1>Hello pretty women!</h1>
+      <h1>Kitchenette</h1>
+      <GroceryList />
       <Pantry />
+      <Recipes />
     </div>
   );
 }
