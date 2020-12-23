@@ -1,29 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { groceryListItems } from "./testData.js";
 
 function GroceryList() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setItems(groceryListItems);
+  }, []);
+
+  function addItem(event) {
+    event.preventDefault();
+    const newItem = {
+      id: Math.random(),
+      name: event.target["name"].value,
+      checked: false,
+    };
+    setItems((prevItems) => [...prevItems, newItem]);
+  }
+
   return (
     <div>
       <h1>Grocery List</h1>
 
-      <div>
+      <form onSubmit={addItem}>
         <span>Add item: </span>
-        <input type="text" placeholder="Item name..." />
+        <input type="text" placeholder="Item name..." name="name" />
         <button>+</button>
-      </div>
+      </form>
 
       <ul>
-        <li>
-          <div>
-            <input type="checkbox" />
-            <span>Bananas</span>
-          </div>
-        </li>
-        <li>
-          <div>
-            <input type="checkbox" />
-            <span>Milk</span>
-          </div>
-        </li>
+        {items.map((item) => (
+          <li key={item.id}>
+            <span>{item.name}</span>
+            <input type="checkbox" defaultChecked={item.checked} />
+          </li>
+        ))}
       </ul>
     </div>
   );
