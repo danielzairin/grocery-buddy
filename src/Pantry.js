@@ -15,21 +15,17 @@ class Pantry extends React.Component {
     super()
     
       this.state={//Add pantry item from testData 
-        pantryItem : pantryItems.map(item => 
-          <AddtoPantry key={item.id} name={item.name} expdate={item.expiryDate}/>)
-      //
+        pItem : pantryItems
+     
     }
   }
   render(){
+    const pantryItem=pantryItems.map(item => 
+          <AddtoPantry key={item.id} name={item.name} expdate={item.expiryDate}/>)
     return(
       <div>
         <h1>Pantry</h1>
-        <ul>
-          <li>
-          {this.state.pantryItem}
-          </li>
-        </ul>
-       
+          {pantryItem}
       </div>
     )
   }
