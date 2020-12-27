@@ -11,9 +11,9 @@
 
 ### Back-end
 
-- [ ] User context
-- [ ] Setup and connect to Firebase
-- [ ] Database CRUD functions
+- [x] User context
+- [x] Setup and connect to Firebase
+- [x] Database CRUD functions
 
 ### Miscellaneous
 
