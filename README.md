@@ -1,11 +1,20 @@
-# Grocery Buddy
+## Tasks
 
-## How to save to GitHub
+### Front-end
 
-1. Stage changes
-2. Commit
-3. Push
+- [x] HTML tempalte
+- [x] Connect to Spoonacular Food API
+- [ ] Add pantry item page
+- [ ] QR code reader
+- [ ] Routing
+- [ ] Styling with Bootstrap
 
-## How to get changes from GitHub
+### Back-end
 
-1. Pull
+- [ ] User context
+- [ ] Setup and connect to Firebase
+- [ ] Database CRUD functions
+
+### Miscellaneous
+
+- [ ] Report
