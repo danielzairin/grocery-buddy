@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { pantryItems } from "./testData";
+import { pantryItems } from "../testData";
 
 function Recipes() {
   const [recipes, setRecipes] = useState([]);

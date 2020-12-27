@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { groceryListItems } from "./testData.js";
+import { groceryListItems } from "../testData.js";
 
 function GroceryList() {
   const [items, setItems] = useState([]);

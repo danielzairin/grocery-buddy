@@ -1,7 +1,7 @@
 import React from "react";
-import GroceryList from "./GroceryList";
-import Pantry from "./Pantry";
-import Recipes from "./Recipes";
+import GroceryList from "./components/GroceryList";
+import Pantry from "./components/Pantry";
+import Recipes from "./components/Recipes";
 
 function App() {
   return (
