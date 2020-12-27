@@ -2,18 +2,30 @@ import React from "react";
 import GroceryList from "./components/GroceryList";
 import Pantry from "./components/Pantry";
 import Recipes from "./components/Recipes";
+import Nav from "./components/Nav";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
+    <Router>
     <div>
       <h1>Kitchenette</h1>
-      <GroceryList />
-      <Pantry />
-      <Recipes />
+      <Nav />
+        <Switch>
+          <Route path="/" exact component ={Home} />
+          <Route path="/GroceryList" component ={GroceryList} />
+          <Route path="/Pantry" component ={Pantry} />
+          <Route path="/Recipes" component ={Recipes} />
+        </Switch>
     </div>
+  </Router>
   );
 }
-
+const Home = ()=> (
+  <div>
+    <h1>Home Page</h1>
+  </div>
+);
 export default App;
 
 // npm start

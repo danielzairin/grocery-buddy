@@ -57,6 +57,28 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
+nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+}
+.nav-link :hover {
+  background-color: grey;
+}
+
+.nav-link{
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items:center;
+  min-height: 10vh;
+  background: white;
+  color: black;
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
