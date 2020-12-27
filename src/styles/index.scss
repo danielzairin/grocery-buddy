@@ -1,0 +1,13 @@
+body {
+  padding: 1rem;
+}
+
+$theme-colors: (
+  "primary": #a9d18e,
+  "secondary": #c5e0b4,
+  "warning": #ffe699,
+  "success": #00b04f,
+  "danger": #ff6969,
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
