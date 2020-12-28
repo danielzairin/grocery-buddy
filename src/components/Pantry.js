@@ -1,36 +1,26 @@
-import React from "react";
-import AddtoPantry from "./AddtoPantry";
-import { pantryItems } from "../testData";
+import React, { useEffect, useState } from "react"
+import { pantryItems } from "../testData.js";
 
-/*function Pantry() {
+function Pantry() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setItems(pantryItems);
+  }, []);
+
   return (
     <div>
       <h1>Pantry</h1>
+
+      <ul> <h3>Items in Pantry:</h3>
+        {items.map((item) => (
+          <li key={item.id}><span>{item.name} {item.expiryDate.toLocaleDateString()} </span></li>
+        ))}
+      </ul>
+     
     </div>
   );
-}*/
-
-class Pantry extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      //Add pantry item from testData
-      pItem: pantryItems,
-    };
-  }
-
-  render() {
-    const pantryItem = pantryItems.map((item) => (
-      <AddtoPantry key={item.id} name={item.name} expdate={item.expiryDate} />
-    ));
-    return (
-      <div>
-        <h1>Pantry</h1>
-        {pantryItem}
-      </div>
-    );
-  }
 }
+
 
 export default Pantry;
