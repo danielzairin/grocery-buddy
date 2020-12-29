@@ -17,8 +17,8 @@ function Pantry() {
 
      
     <div>
-      <h4>Today : {dt} </h4> 
-      <h1>Pantry</h1>
+       <h1>Pantry</h1>
+       <h4>Today : {dt} </h4> 
       <ul> <h3>Items in Pantry:</h3>
         {items.map((item) => (
           <li key={item.id}><span>{item.name} {item.expiryDate.toLocaleDateString()} </span></li>
