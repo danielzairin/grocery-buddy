@@ -1,26 +1,26 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { NavLink } from "react-router-dom";
 
 function Nav() {
-  const navStyle={color: "black"};
-
   return (
-    
-    <nav>  
-    <Link to="/">
-    <p>Home </p>
-        <ul  className="nav-link">
-              <Link  style= {navStyle} to="/GroceryList">
-                <li>Grocery List </li>
-              </Link>
-              <Link style= {navStyle} to="/Pantry">
-                <li> Pantry </li>
-              </Link>
-              <Link style= {navStyle} to="/Recipe">
-                <li>Recipe </li>
-              </Link>
-        </ul>
-        </Link>
+    <nav className="navbar navbar-expand navbar-light fixed-bottom bg-primary">
+      <ul className="navbar-nav d-flex justify-content-around w-100">
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/grocerylist">
+            🛒
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/pantry">
+            🥑
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/recipes">
+            👩‍🍳
+          </NavLink>
+        </li>
+      </ul>
     </nav>
   );
 }
