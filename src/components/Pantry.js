@@ -6,12 +6,19 @@ function Pantry() {
 
   useEffect(() => {
     setItems(pantryItems);
+    
   }, []);
 
-  return (
-    <div>
-      <h1>Pantry</h1>
+    //display todays date
+    var showdate=new Date();
+    var dt=showdate.toDateString();
 
+  return (
+
+     
+    <div>
+      <h4>Today : {dt} </h4> 
+      <h1>Pantry</h1>
       <ul> <h3>Items in Pantry:</h3>
         {items.map((item) => (
           <li key={item.id}><span>{item.name} {item.expiryDate.toLocaleDateString()} </span></li>
