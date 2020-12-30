@@ -22,37 +22,56 @@ function Recipes() {
 
   return (
     <div>
-      <h1 class="card text-center">Recipes</h1>
-      
-      <div class="card-deck row-cols-sm-3">
+      <h1
+        className="text-center fixed-top w-100 bg-primary shadow-sm"
+        style={{ height: "55px" }}
+      >
+        Recipes
+      </h1>
 
-          {recipes.map((recipe) => (
-            <div key={recipe.id}>
-              <div class="card h-100">
-                        
-                <img class="card-img-top" src={recipe.image} />
+      <div className="card-deck row-cols-sm-3">
+        {recipes.map((recipe) => (
+          <div key={recipe.id}>
+            <div className="card shadow">
+              <img
+                className="card-img-top"
+                src={recipe.image}
+                alt={recipe.title}
+              />
 
-                <div class="card-body">
-                  <h2 class="card-title">{recipe.title}</h2>            
+              <div className="card-header bg-secondary">
+                <h2 className="card-title">{recipe.title}</h2>
+              </div>
 
-                  <p>Used ingredients:</p>
-                    <ul>
-                      {recipe.usedIngredients.map((ingredient) => (
-                      <li key={ingredient.id}>{ingredient.name}</li>
-                       ))}
-                    </ul>
+              <div className="card-body bg-warning">
+                <h5>Used ingredients:</h5>
+                <ul className="list-unstyled">
+                  {recipe.usedIngredients.map((ingredient) => (
+                    <li
+                      className="text-success text-capitalize"
+                      key={ingredient.id}
+                    >
+                      ✔ {ingredient.name}
+                    </li>
+                  ))}
+                </ul>
 
-                  <p>Missing ingredients:</p>
-                    <ul>
-                      {recipe.missedIngredients.map((ingredient) => (
-                        <li key={ingredient.id}>{ingredient.name}</li>
-                      ))}
-                    </ul>
-                </div>
-              </div>      
-            </div>    
-          ))}
-      </div>  
+                <h5>Missing ingredients:</h5>
+                <ul className="list-unstyled">
+                  {recipe.missedIngredients.map((ingredient) => (
+                    <li
+                      className="text-danger text-capitalize"
+                      key={ingredient.id}
+                    >
+                      ❌ {ingredient.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
