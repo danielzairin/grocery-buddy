@@ -12,7 +12,7 @@ export let pantryItems = [
   {
     id: 3,
     name: "Chicken",
-    expiryDate: new Date(2020, 10, 30),
+    expiryDate: new Date(2020, 11, 30),
   },
   {
     id: 4,

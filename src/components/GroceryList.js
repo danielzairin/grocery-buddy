@@ -16,26 +16,42 @@ function GroceryList() {
       checked: false,
     };
     setItems((prevItems) => [...prevItems, newItem]);
+    event.target.reset();
   }
 
   return (
     <div>
-      <h1>Grocery List</h1>
+      <h1 className="text-center">Grocery List</h1>
 
-      <form onSubmit={addItem}>
-        <span>Add item: </span>
-        <input type="text" placeholder="Item name..." name="name" />
-        <button>+</button>
-      </form>
+      <div className="card shadow">
+        <div className="card-body bg-warning">
+          <form onSubmit={addItem}>
+            <input
+              className="form-control rounded-0"
+              type="text"
+              placeholder="Item name..."
+              name="name"
+              required
+              autoComplete="off"
+              spellCheck="false"
+            />
+            <button className="btn btn-secondary btn-block rounded-0">
+              Add
+            </button>
+          </form>
 
-      <ul>
-        {items.map((item) => (
-          <li key={item.id}>
-            <span>{item.name}</span>
-            <input type="checkbox" defaultChecked={item.checked} />
-          </li>
-        ))}
-      </ul>
+          <hr />
+
+          <ul className="list-unstyled px-3">
+            {items.map((item) => (
+              <li className="my-2" key={item.id}>
+                <input type="checkbox" defaultChecked={item.checked} />
+                <span className="h5 m-2">{item.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
