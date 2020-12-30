@@ -27,12 +27,11 @@ function addPantry(event){
 //sortingbyExpiryDate
 const sortedpantryItems = pantryItems.sort((a,b) => a.expiryDate - b.expiryDate)
 
-   
-
+ 
   return (
     <div>
         <h1>Pantry</h1>
-        <h4>Today : {dt} </h4> 
+        <h5>Today : {dt} </h5> 
 
       <form onSubmit={addPantry}>
         <span>Add item: </span>
@@ -43,11 +42,19 @@ const sortedpantryItems = pantryItems.sort((a,b) => a.expiryDate - b.expiryDate)
       </form>
 
       <ul> <h3>Items in Pantry:</h3>
-      
-        {items.map((item) => (
-         <li key={item.id}><span>{item.name}{item.expiryDate.toLocaleDateString()}</span></li>
-       ))}
+            {items.map((item) => (
+         <li key={item.id}>
+           <span>{item.name}  {item.expiryDate.toLocaleDateString()  }</span>
+
+           <span><h7>  Item expired in {Math.floor((item.expiryDate-showdate)/(1000*60*60*24)) } days.</h7></span>
+          </li>
+        
+         ))}
       </ul>
+
+     
+         
+      
      
     </div>
   );

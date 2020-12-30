@@ -2,22 +2,22 @@ export let pantryItems = [
   {
     id: 1,
     name: "Milk",
-    expiryDate: new Date(2020, 10, 15),
+    expiryDate: new Date(2021, 1, 15),
   },
   {
     id: 2,
     name: "Banana",
-    expiryDate: new Date(2020, 10, 20),
+    expiryDate: new Date(2021, 0, 30),
   },
   {
     id: 3,
     name: "Chicken",
-    expiryDate: new Date(2020, 11, 30),
+    expiryDate: new Date(2021, 3, 30),
   },
   {
     id: 4,
     name: "Rice",
-    expiryDate: new Date(2020, 11, 15),
+    expiryDate: new Date(2021, 3, 15),
   },
 ];
 
