@@ -25,7 +25,7 @@ function addPantry(event){
     var dt=showdate.toDateString();
 
 //sortingbyExpiryDate
-const sortedpantryItems = pantryItems.slice().sort((a,b) => b.expiryDate - a.expiryDate)
+const sortedpantryItems = pantryItems.sort((a,b) => a.expiryDate - b.expiryDate)
 
    
 
