@@ -22,28 +22,37 @@ function Recipes() {
 
   return (
     <div>
-      <h1>Recipes</h1>
-      {recipes.map((recipe) => (
-        <div key={recipe.id}>
-          <h2>{recipe.title}</h2>
+      <h1 class="card text-center">Recipes</h1>
+      
+      <div class="card-deck row-cols-sm-3">
 
-          <img src={recipe.image} />
+          {recipes.map((recipe) => (
+            <div key={recipe.id}>
+              <div class="card h-100">
+                        
+                <img class="card-img-top" src={recipe.image} />
 
-          <p>Used ingredients:</p>
-          <ul>
-            {recipe.usedIngredients.map((ingredient) => (
-              <li key={ingredient.id}>{ingredient.name}</li>
-            ))}
-          </ul>
+                <div class="card-body">
+                  <h2 class="card-title">{recipe.title}</h2>            
 
-          <p>Missing ingredients:</p>
-          <ul>
-            {recipe.missedIngredients.map((ingredient) => (
-              <li key={ingredient.id}>{ingredient.name}</li>
-            ))}
-          </ul>
-        </div>
-      ))}
+                  <p>Used ingredients:</p>
+                    <ul>
+                      {recipe.usedIngredients.map((ingredient) => (
+                      <li key={ingredient.id}>{ingredient.name}</li>
+                       ))}
+                    </ul>
+
+                  <p>Missing ingredients:</p>
+                    <ul>
+                      {recipe.missedIngredients.map((ingredient) => (
+                        <li key={ingredient.id}>{ingredient.name}</li>
+                      ))}
+                    </ul>
+                </div>
+              </div>      
+            </div>    
+          ))}
+      </div>  
     </div>
   );
 }
