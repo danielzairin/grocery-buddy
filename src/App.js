@@ -8,20 +8,19 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   return (
     <Router>
-    <div>
-      <h1>Kitchenette</h1>
-      <Nav />
+      <div className="container">
+        <Nav />
         <Switch>
-          <Route path="/" exact component ={Home} />
-          <Route path="/GroceryList" component ={GroceryList} />
-          <Route path="/Pantry" component ={Pantry} />
-          <Route path="/Recipes" component ={Recipes} />
+          <Route path="/" exact component={Home} />
+          <Route path="/GroceryList" component={GroceryList} />
+          <Route path="/Pantry" component={Pantry} />
+          <Route path="/Recipes" component={Recipes} />
         </Switch>
-    </div>
-  </Router>
+      </div>
+    </Router>
   );
 }
-const Home = ()=> (
+const Home = () => (
   <div>
     <h1>Home Page</h1>
   </div>

@@ -21,7 +21,12 @@ function GroceryList() {
 
   return (
     <div>
-      <h1 className="text-center">Grocery List</h1>
+      <h1
+        className="text-center fixed-top w-100 bg-primary shadow-sm"
+        style={{ height: "55px" }}
+      >
+        Grocery List
+      </h1>
 
       <div className="card shadow">
         <div className="card-body bg-warning">
