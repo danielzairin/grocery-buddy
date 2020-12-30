@@ -29,7 +29,7 @@ function Recipes() {
         Recipes
       </h1>
 
-      <div className="card-deck row-cols-sm-3">
+      <div className="card-deck row-cols-md-2 row-cols-lg-3">
         {recipes.map((recipe) => (
           <div key={recipe.id}>
             <div className="card shadow">
