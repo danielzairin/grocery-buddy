@@ -24,6 +24,11 @@ function addPantry(event){
     var showdate=new Date();
     var dt=showdate.toDateString();
 
+//sortingbyExpiryDate
+const sortedpantryItems = pantryItems.slice().sort((a,b) => b.expiryDate - a.expiryDate)
+
+   
+
   return (
     <div>
         <h1>Pantry</h1>
@@ -38,8 +43,9 @@ function addPantry(event){
       </form>
 
       <ul> <h3>Items in Pantry:</h3>
+      
         {items.map((item) => (
-          <li key={item.id}><span>{item.name}{item.expiryDate.toLocaleDateString()}</span></li>
+         <li key={item.id}><span>{item.name}{item.expiryDate.toLocaleDateString()}</span></li>
        ))}
       </ul>
      
