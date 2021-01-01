@@ -49,11 +49,7 @@ function Pantry() {
       .catch(console.error);
   }
 
-  //to remove item from pantry list
-  const handleRemoveItem = (e) => {
-    const name = e.target.getAttribute("name")
-    setItems(items.filter(item => item.name !== name));
-   };
+ 
   return (
     <div>
       <h1
@@ -112,10 +108,7 @@ function Pantry() {
 
               return (
                 <li key={item.id} >
-                
-                <span  name={item.name} onClick={handleRemoveItem}>
-                🗑️
-             </span>
+          
              
                   <div className="card shadow mb-3">
                     <div className={`card-body bg-${colour}`}>
