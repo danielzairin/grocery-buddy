@@ -10,7 +10,16 @@ function Recipes() {
     // Fetch pantry items from database
     fetchPantryItems(user.uid)
       .then((pantryItems) => {
-        const urlQuery = pantryItems.map((item) => item.name).toString();
+        const urlQuery = pantryItems
+          .filter((item) => {
+            const daysUntilExpired = Math.ceil(
+              (item.expiryDate - new Date()) / (1000 * 60 * 60 * 24)
+            );
+
+            return daysUntilExpired > 0;
+          })
+          .map((item) => item.name)
+          .toString();
 
         // Fetch recipes using API call
         fetch(
