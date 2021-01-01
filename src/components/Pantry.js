@@ -19,6 +19,11 @@ function Pantry() {
     setItems((prevItems) => [...prevItems, newItem]);
   }
 
+  //to remove item from pantry list
+  const handleRemoveItem = (e) => {
+    const name = e.target.getAttribute("name")
+    setItems(items.filter(item => item.name !== name));
+   };
   return (
     <div>
       <h1
@@ -53,12 +58,14 @@ function Pantry() {
                 Add
               </button>
             </form>
+            
           </div>
         </div>
       </div>
 
       <hr />
-
+    
+      
       {items.length > 0 ? (
         <ul className="list-unstyled">
           {items
@@ -67,6 +74,7 @@ function Pantry() {
               const daysUntilExpired = Math.floor(
                 (item.expiryDate - new Date()) / (1000 * 60 * 60 * 24)
               );
+             
 
               let colour = "secondary";
 
@@ -75,7 +83,12 @@ function Pantry() {
               else if (daysUntilExpired <= 14) colour = "warning";
 
               return (
-                <li key={item.id}>
+                <li key={item.id} >
+                
+                <span  name={item.name} onClick={handleRemoveItem}>
+                🗑️
+             </span>
+             
                   <div className="card shadow mb-3">
                     <div className={`card-body bg-${colour}`}>
                       <h5 className="card-tittle m-0">{item.name}</h5>
@@ -89,13 +102,18 @@ function Pantry() {
                       ) : (
                         <p className="m-0">Expired</p>
                       )}
+                      
                     </div>
                   </div>
+                  
                 </li>
+                
               );
             })}
         </ul>
       ) : null}
+
+      
     </div>
   );
 }
