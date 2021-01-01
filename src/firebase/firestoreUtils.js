@@ -17,7 +17,15 @@ export async function fetchPantryItems(userId) {
     .collection("pantryItems")
     .where("userId", "==", userId)
     .get()
-    .then((snapshot) => snapshot.docs.map((doc) => doc.data()));
+    .then((snapshot) =>
+      snapshot.docs.map((doc) => {
+        return {
+          id: doc.id,
+          name: doc.data().name,
+          expiryDate: new Date(doc.data().expiryDate.seconds * 1000),
+        };
+      })
+    );
 }
 
 // Add a grocery item

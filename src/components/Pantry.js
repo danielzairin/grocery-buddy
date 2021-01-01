@@ -1,22 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { pantryItems } from "../testData.js";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  fetchPantryItems,
+  addPantryItem,
+  deletePantryItem,
+} from "../firebase/firestoreUtils";
+import { UserContext } from "../contexts/UserContext";
 
 function Pantry() {
   const [items, setItems] = useState([]);
+  const user = useContext(UserContext);
 
   useEffect(() => {
-    setItems(pantryItems);
-  }, []);
+    // Fetch items from database
+    fetchPantryItems(user.uid).then((pantryItems) => {
+      setItems(pantryItems);
+    });
+  }, [user]);
 
-  //add new item to pantry
-  function addPantry(event) {
+  // Add new item to pantry
+  function addItem(event) {
     event.preventDefault();
-    const newItem = {
-      id: Math.random(),
+
+    let newItem = {
       name: event.target["name"].value,
       expiryDate: new Date(event.target["expiryDate"].value),
     };
-    setItems((prevItems) => [...prevItems, newItem]);
+
+    // Add item to database
+    addPantryItem(newItem, user.uid)
+      .then((doc) => {
+        // Get ID of new item
+        newItem = { id: doc.id, ...newItem };
+        // Update UI state
+        setItems((prevItems) => [...prevItems, newItem]);
+      })
+      .catch(console.error);
+  }
+
+  // Delete item from pantry
+  function deleteItem(itemId) {
+    deletePantryItem(itemId)
+      .then(() => {
+        // Update UI state
+        setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+      })
+      .catch(console.error);
   }
 
   return (
@@ -27,47 +55,47 @@ function Pantry() {
       >
         Pantry
       </h1>
-
-      <div className="card">
-        <div className="card shadow">
-          <div className="card-body bg-warning">
-            <form onSubmit={addPantry}>
-              <div className="form-group">
-                <label>Item name</label>
-                <input
-                  className="form-control rounded-0"
-                  type="text"
-                  placeholder="avocados"
-                  name="name"
-                />
-              </div>
-              <div className="form-group">
-                <label>Expiry date</label>
-                <input
-                  className="form-control rounded-0"
-                  type="date"
-                  name="expiryDate"
-                />
-              </div>
-              <button className="btn btn-primary btn-block rounded-0">
-                Add
-              </button>
-            </form>
-          </div>
+      {/* Add item form */}
+      <div className="card shadow">
+        <div className="card-body bg-warning">
+          <form onSubmit={addItem}>
+            <div className="form-group">
+              <label>Item name</label>
+              <input
+                className="form-control"
+                type="text"
+                name="name"
+                required
+                autoComplete="off"
+              />
+            </div>
+            <div className="form-group">
+              <label>Expiry date</label>
+              <input
+                className="form-control"
+                type="date"
+                name="expiryDate"
+                required
+              />
+            </div>
+            <button className="btn btn-primary btn-block">Add</button>
+          </form>
         </div>
       </div>
 
+      {/* List of pantry items */}
       <hr />
-
       {items.length > 0 ? (
         <ul className="list-unstyled">
           {items
             .sort((a, b) => a.expiryDate - b.expiryDate)
             .map((item) => {
-              const daysUntilExpired = Math.floor(
+              // Calculate number of days left until expiry date
+              const daysUntilExpired = Math.ceil(
                 (item.expiryDate - new Date()) / (1000 * 60 * 60 * 24)
               );
 
+              // Set background colour based on days until epxiry date
               let colour = "secondary";
 
               if (daysUntilExpired <= 0) colour = "dark text-light";
@@ -83,12 +111,18 @@ function Pantry() {
                         Exp: {item.expiryDate.toLocaleDateString()}
                       </p>
                       {daysUntilExpired > 0 ? (
-                        <p className="m-0">
+                        <span className="m-0">
                           Expires in {daysUntilExpired} days
-                        </p>
+                        </span>
                       ) : (
-                        <p className="m-0">Expired</p>
+                        <span className="m-0">Expired</span>
                       )}
+                      <span
+                        className="float-right"
+                        onClick={() => deleteItem(item.id)}
+                      >
+                        🗑
+                      </span>
                     </div>
                   </div>
                 </li>
