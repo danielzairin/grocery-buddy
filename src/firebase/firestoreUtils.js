@@ -7,7 +7,14 @@ export async function fetchGroceryItems(userId) {
     .collection("groceryItems")
     .where("userId", "==", userId)
     .get()
-    .then((snapshot) => snapshot.docs.map((doc) => doc.data()));
+    .then((snapshot) =>
+      snapshot.docs.map((doc) => {
+        return {
+          id: doc.id,
+          ...doc.data(),
+        };
+      })
+    );
 }
 
 // Fetch pantry items
