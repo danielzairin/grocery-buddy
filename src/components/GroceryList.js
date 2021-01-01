@@ -3,6 +3,7 @@ import {
   fetchGroceryItems,
   addGroceryItem,
   deleteGroceryItem,
+  toggleGroceryItem,
 } from "../firebase/firestoreUtils";
 import { UserContext } from "../contexts/UserContext";
 
@@ -80,7 +81,11 @@ function GroceryList() {
             <ul className="list-unstyled px-3">
               {items.map((item) => (
                 <li className="my-2" key={item.id}>
-                  <input type="checkbox" defaultChecked={item.checked} />
+                  <input
+                    type="checkbox"
+                    defaultChecked={item.checked}
+                    onChange={() => toggleGroceryItem(item.id)}
+                  />
                   <span className="h5 m-2">{item.name}</span>
                   <span
                     className="float-right"

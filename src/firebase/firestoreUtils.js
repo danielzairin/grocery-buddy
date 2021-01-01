@@ -76,3 +76,16 @@ export async function deletePantryItem(itemId) {
     .delete()
     .catch((error) => error);
 }
+
+// Toggle a grocery item
+export async function toggleGroceryItem(itemId) {
+  return await firebase
+    .firestore()
+    .collection("groceryItems")
+    .doc(itemId)
+    .get()
+    .then((doc) => {
+      doc.ref.update({ checked: !doc.data().checked });
+    })
+    .catch(console.error);
+}
