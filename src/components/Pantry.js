@@ -35,6 +35,8 @@ function Pantry() {
         setItems((prevItems) => [...prevItems, newItem]);
       })
       .catch(console.error);
+
+    event.target.reset();
   }
 
   // Delete item from pantry
