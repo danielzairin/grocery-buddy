@@ -80,7 +80,7 @@ function Pantry() {
                 required
               />
             </div>
-            <button className="btn btn-primary btn-block">Add</button>
+            <button className="btn btn-secondary btn-block">Add</button>
           </form>
         </div>
       </div>
