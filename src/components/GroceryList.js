@@ -1,22 +1,51 @@
-import React, { useEffect, useState } from "react";
-import { groceryListItems } from "../testData.js";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  fetchGroceryItems,
+  addGroceryItem,
+  deleteGroceryItem,
+} from "../firebase/firestoreUtils";
+import { UserContext } from "../contexts/UserContext";
 
 function GroceryList() {
   const [items, setItems] = useState([]);
+  const user = useContext(UserContext);
 
   useEffect(() => {
-    setItems(groceryListItems);
-  }, []);
+    // Fetch grocery items from database
+    fetchGroceryItems(user.uid).then((items) => {
+      setItems(items);
+    });
+  }, [user]);
 
   function addItem(event) {
     event.preventDefault();
-    const newItem = {
-      id: Math.random(),
+
+    let newItem = {
       name: event.target["name"].value,
       checked: false,
     };
-    setItems((prevItems) => [...prevItems, newItem]);
+
+    // Add item to grocery list
+    addGroceryItem(newItem, user.uid)
+      .then((doc) => {
+        // Get ID of new item
+        newItem = { id: doc.id, ...newItem };
+        // Update UI state
+        setItems((prevItems) => [...prevItems, newItem]);
+      })
+      .catch(console.error);
+
     event.target.reset();
+  }
+
+  // Delete item from grocery list
+  function deleteItem(itemId) {
+    deleteGroceryItem(itemId)
+      .then(() => {
+        // Update UI state
+        setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+      })
+      .catch(console.error);
   }
 
   return (
@@ -31,30 +60,38 @@ function GroceryList() {
       <div className="card shadow">
         <div className="card-body bg-warning">
           <form onSubmit={addItem}>
-            <input
-              className="form-control rounded-0"
-              type="text"
-              placeholder="Item name..."
-              name="name"
-              required
-              autoComplete="off"
-              spellCheck="false"
-            />
-            <button className="btn btn-secondary btn-block rounded-0">
-              Add
-            </button>
+            <div className="form-group">
+              <label>Item name</label>
+              <input
+                className="form-control"
+                type="text"
+                name="name"
+                required
+                autoComplete="off"
+                spellCheck="false"
+              />
+            </div>
+            <button className="btn btn-secondary btn-block">Add</button>
           </form>
 
           <hr />
 
-          <ul className="list-unstyled px-3">
-            {items.map((item) => (
-              <li className="my-2" key={item.id}>
-                <input type="checkbox" defaultChecked={item.checked} />
-                <span className="h5 m-2">{item.name}</span>
-              </li>
-            ))}
-          </ul>
+          {items.length > 0 ? (
+            <ul className="list-unstyled px-3">
+              {items.map((item) => (
+                <li className="my-2" key={item.id}>
+                  <input type="checkbox" defaultChecked={item.checked} />
+                  <span className="h5 m-2">{item.name}</span>
+                  <span
+                    className="float-right"
+                    onClick={() => deleteItem(item.id)}
+                  >
+                    ❌
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
       </div>
     </div>
