@@ -3,6 +3,7 @@ import {
   fetchPantryItems,
   addPantryItem,
   deletePantryItem,
+  addGroceryItem,
 } from "../firebase/firestoreUtils";
 import { UserContext } from "../contexts/UserContext";
 
@@ -49,7 +50,6 @@ function Pantry() {
       .catch(console.error);
   }
 
- 
   return (
     <div>
       <h1
@@ -58,6 +58,7 @@ function Pantry() {
       >
         Pantry
       </h1>
+
       {/* Add item form */}
       <div className="card shadow">
         <div className="card-body bg-warning">
@@ -97,49 +98,57 @@ function Pantry() {
               const daysUntilExpired = Math.ceil(
                 (item.expiryDate - new Date()) / (1000 * 60 * 60 * 24)
               );
-             
 
               // Set background colour based on days until epxiry date
-              let colour = "secondary";
+              let colour = "light";
 
               if (daysUntilExpired <= 0) colour = "dark text-light";
               else if (daysUntilExpired <= 7) colour = "danger";
               else if (daysUntilExpired <= 14) colour = "warning";
 
               return (
-                <li key={item.id} >
-          
-             
+                <li key={item.id}>
                   <div className="card shadow mb-3">
                     <div className={`card-body bg-${colour}`}>
                       <h5 className="card-tittle m-0">{item.name}</h5>
                       <p className="m-0">
                         Exp: {item.expiryDate.toLocaleDateString()}
                       </p>
+
                       {daysUntilExpired > 0 ? (
-                        <span className="m-0">
-                          Expires in {daysUntilExpired} days
-                        </span>
+                        <p>Expires in {daysUntilExpired} days</p>
                       ) : (
-                        <span className="m-0">Expired</span>
+                        <p>Expired</p>
                       )}
-                      <span
-                        className="float-right"
-                        onClick={() => deleteItem(item.id)}
-                      >
-                        🗑
-                      </span>
+
+                      {/* Buttons */}
+                      {daysUntilExpired > 0 ? (
+                        <button
+                          className="btn btn-secondary float-right"
+                          onClick={() =>
+                            addGroceryItem(
+                              { name: item.name, checked: false },
+                              user.uid
+                            )
+                          }
+                        >
+                          Add to grocery list
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-light float-right"
+                          onClick={() => deleteItem(item.id)}
+                        >
+                          Throw away
+                        </button>
+                      )}
                     </div>
                   </div>
-                  
                 </li>
-                
               );
             })}
         </ul>
       ) : null}
-
-      
     </div>
   );
 }
