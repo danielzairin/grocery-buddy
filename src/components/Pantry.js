@@ -122,9 +122,9 @@ function Pantry() {
                       )}
 
                       {/* Buttons */}
-                      {daysUntilExpired > 0 ? (
+                      <div>
                         <button
-                          className="btn btn-secondary float-right"
+                          className="btn btn-secondary"
                           onClick={() =>
                             addGroceryItem(
                               { name: item.name, checked: false },
@@ -134,14 +134,17 @@ function Pantry() {
                         >
                           Add to grocery list
                         </button>
-                      ) : (
                         <button
-                          className="btn btn-light float-right"
+                          className={
+                            daysUntilExpired > 0
+                              ? "btn btn-dark ml-3"
+                              : "btn btn-light ml-3"
+                          }
                           onClick={() => deleteItem(item.id)}
                         >
-                          Throw away
+                          Remove
                         </button>
-                      )}
+                      </div>
                     </div>
                   </div>
                 </li>
