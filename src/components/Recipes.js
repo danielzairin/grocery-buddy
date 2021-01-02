@@ -23,7 +23,7 @@ function Recipes() {
 
         // Fetch recipes using API call
         fetch(
-          `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${process.env.REACT_APP_API_KEY}&number=5&ingredients=${urlQuery}`
+          `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${process.env.REACT_APP_API_KEY}&number=5&ranking=2&ingredients=${urlQuery}`
         )
           .then((response) => response.json())
           .then((recipes) => setRecipes(recipes))
@@ -76,17 +76,21 @@ function Recipes() {
                       </li>
                     ))}
                   </ul>
-                  <h5>Missing ingredients:</h5>
-                  <ul className="list-unstyled">
-                    {recipe.missedIngredients.map((ingredient) => (
-                      <li
-                        className="text-danger text-capitalize"
-                        key={ingredient.id}
-                      >
-                        ❌ {ingredient.name}
-                      </li>
-                    ))}
-                  </ul>
+                  {recipe.missedIngredients.length > 0 ? (
+                    <div>
+                      <h5>Missing ingredients:</h5>
+                      <ul className="list-unstyled">
+                        {recipe.missedIngredients.map((ingredient) => (
+                          <li
+                            className="text-danger text-capitalize"
+                            key={ingredient.id}
+                          >
+                            ❌ {ingredient.name}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
                 </div>
                 <div className="card-footer p-0">
                   <button
