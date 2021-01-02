@@ -60,6 +60,7 @@ function GroceryList() {
 
       <div className="card shadow">
         <div className="card-body bg-warning">
+          {/* Grocery list form */}
           <form onSubmit={addItem}>
             <div className="form-group">
               <label>Item name</label>
@@ -75,41 +76,43 @@ function GroceryList() {
             <button className="btn btn-secondary btn-block">Add</button>
           </form>
 
-          <hr />
-
+          {/* List of groceries */}
           {items.length > 0 ? (
-            <ul className="list-unstyled px-3">
-              {items.map((item) => (
-                <li
-                  className="my-2"
-                  key={item.id}
-                  id={item.id}
-                  style={
-                    item.checked ? { textDecoration: "line-through" } : null
-                  }
-                >
-                  <input
-                    type="checkbox"
-                    defaultChecked={item.checked}
-                    onChange={() => {
-                      toggleGroceryItem(item.id);
-                      const li = document.getElementById(item.id);
-                      if (li.style.textDecoration === "line-through")
-                        li.style.textDecoration = "none";
-                      else li.style.textDecoration = "line-through";
-                    }}
-                  />
-                  <span className="h5 m-2">{item.name}</span>
-                  <span
-                    className="float-right"
-                    onClick={() => deleteItem(item.id)}
-                    style={{ cursor: "pointer" }}
+            <div>
+              <hr />
+              <ul className="list-unstyled px-3">
+                {items.map((item) => (
+                  <li
+                    className="my-2"
+                    key={item.id}
+                    id={item.id}
+                    style={
+                      item.checked ? { textDecoration: "line-through" } : null
+                    }
                   >
-                    ✕
-                  </span>
-                </li>
-              ))}
-            </ul>
+                    <input
+                      type="checkbox"
+                      defaultChecked={item.checked}
+                      onChange={() => {
+                        toggleGroceryItem(item.id);
+                        const li = document.getElementById(item.id);
+                        if (li.style.textDecoration === "line-through")
+                          li.style.textDecoration = "none";
+                        else li.style.textDecoration = "line-through";
+                      }}
+                    />
+                    <span className="h5 m-2">{item.name}</span>
+                    <span
+                      className="float-right"
+                      onClick={() => deleteItem(item.id)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      ✕
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ) : null}
         </div>
       </div>

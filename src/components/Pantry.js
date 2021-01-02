@@ -90,70 +90,72 @@ function Pantry() {
       </div>
 
       {/* List of pantry items */}
-      <hr />
       {items.length > 0 ? (
-        <ul className="list-unstyled">
-          {items
-            .sort((a, b) => a.expiryDate - b.expiryDate)
-            .map((item) => {
-              // Calculate number of days left until expiry date
-              const daysUntilExpired = Math.ceil(
-                (item.expiryDate - new Date()) / (1000 * 60 * 60 * 24)
-              );
+        <div>
+          <hr />
+          <ul className="list-unstyled">
+            {items
+              .sort((a, b) => a.expiryDate - b.expiryDate)
+              .map((item) => {
+                // Calculate number of days left until expiry date
+                const daysUntilExpired = Math.ceil(
+                  (item.expiryDate - new Date()) / (1000 * 60 * 60 * 24)
+                );
 
-              // Set background colour based on days until epxiry date
-              let colour = "light";
+                // Set background colour based on days until epxiry date
+                let colour = "light";
 
-              if (daysUntilExpired <= 0) colour = "dark text-light";
-              else if (daysUntilExpired <= 7) colour = "danger";
-              else if (daysUntilExpired <= 14) colour = "warning";
+                if (daysUntilExpired <= 0) colour = "dark text-light";
+                else if (daysUntilExpired <= 7) colour = "danger";
+                else if (daysUntilExpired <= 14) colour = "warning";
 
-              return (
-                <li key={item.id}>
-                  <div className="card shadow mb-3">
-                    <div className={`card-body bg-${colour}`}>
-                      <h5 className="card-tittle m-0">{item.name}</h5>
-                      <p className="m-0">
-                        Exp: {item.expiryDate.toLocaleDateString()}
-                      </p>
+                return (
+                  <li key={item.id}>
+                    <div className="card shadow mb-3">
+                      <div className={`card-body bg-${colour}`}>
+                        <h5 className="card-tittle m-0">{item.name}</h5>
+                        <p className="m-0">
+                          Exp: {item.expiryDate.toLocaleDateString()}
+                        </p>
 
-                      {daysUntilExpired > 0 ? (
-                        <p>Expires in {daysUntilExpired} days</p>
-                      ) : (
-                        <p>Expired</p>
-                      )}
+                        {daysUntilExpired > 0 ? (
+                          <p>Expires in {daysUntilExpired} days</p>
+                        ) : (
+                          <p>Expired</p>
+                        )}
 
-                      {/* Buttons */}
-                      <div>
-                        <button
-                          className="btn btn-secondary"
-                          onClick={() => {
-                            addGroceryItem(
-                              { name: item.name, checked: false },
-                              user.uid
-                            );
-                            history.push("/grocerylist");
-                          }}
-                        >
-                          Add to grocery list
-                        </button>
-                        <button
-                          className={
-                            daysUntilExpired > 0
-                              ? "btn btn-dark ml-3"
-                              : "btn btn-light ml-3"
-                          }
-                          onClick={() => deleteItem(item.id)}
-                        >
-                          Remove
-                        </button>
+                        {/* Buttons */}
+                        <div>
+                          <button
+                            className="btn btn-secondary"
+                            onClick={() => {
+                              addGroceryItem(
+                                { name: item.name, checked: false },
+                                user.uid
+                              );
+                              history.push("/grocerylist");
+                            }}
+                          >
+                            Add to grocery list
+                          </button>
+                          <button
+                            className={
+                              daysUntilExpired > 0
+                                ? "btn btn-dark ml-3"
+                                : "btn btn-light ml-3"
+                            }
+                            onClick={() => deleteItem(item.id)}
+                          >
+                            Remove
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
-              );
-            })}
-        </ul>
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
       ) : null}
     </div>
   );
