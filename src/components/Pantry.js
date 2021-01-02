@@ -6,10 +6,12 @@ import {
   addGroceryItem,
 } from "../firebase/firestoreUtils";
 import { UserContext } from "../contexts/UserContext";
+import { useHistory } from "react-router-dom";
 
 function Pantry() {
   const [items, setItems] = useState([]);
   const user = useContext(UserContext);
+  const history = useHistory();
 
   useEffect(() => {
     // Fetch items from database
@@ -125,12 +127,13 @@ function Pantry() {
                       <div>
                         <button
                           className="btn btn-secondary"
-                          onClick={() =>
+                          onClick={() => {
                             addGroceryItem(
                               { name: item.name, checked: false },
                               user.uid
-                            )
-                          }
+                            );
+                            history.push("/grocerylist");
+                          }}
                         >
                           Add to grocery list
                         </button>
