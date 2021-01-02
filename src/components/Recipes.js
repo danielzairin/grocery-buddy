@@ -10,6 +10,8 @@ function Recipes() {
     // Fetch pantry items from database
     fetchPantryItems(user.uid)
       .then((pantryItems) => {
+        if (pantryItems.length === 0) return;
+
         const urlQuery = pantryItems
           .filter((item) => {
             const daysUntilExpired = Math.ceil(
@@ -104,7 +106,11 @@ function Recipes() {
             </div>
           ))}
         </div>
-      ) : null}
+      ) : (
+        <p className="text-center font-italic">
+          No recipes to be suggested, please add items to the pantry.
+        </p>
+      )}
     </div>
   );
 }
