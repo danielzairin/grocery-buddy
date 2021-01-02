@@ -80,18 +80,32 @@ function GroceryList() {
           {items.length > 0 ? (
             <ul className="list-unstyled px-3">
               {items.map((item) => (
-                <li className="my-2" key={item.id}>
+                <li
+                  className="my-2"
+                  key={item.id}
+                  id={item.id}
+                  style={
+                    item.checked ? { textDecoration: "line-through" } : null
+                  }
+                >
                   <input
                     type="checkbox"
                     defaultChecked={item.checked}
-                    onChange={() => toggleGroceryItem(item.id)}
+                    onChange={() => {
+                      toggleGroceryItem(item.id);
+                      const li = document.getElementById(item.id);
+                      if (li.style.textDecoration === "line-through")
+                        li.style.textDecoration = "none";
+                      else li.style.textDecoration = "line-through";
+                    }}
                   />
                   <span className="h5 m-2">{item.name}</span>
                   <span
                     className="float-right"
                     onClick={() => deleteItem(item.id)}
+                    style={{ cursor: "pointer" }}
                   >
-                    ❌
+                    ✕
                   </span>
                 </li>
               ))}
