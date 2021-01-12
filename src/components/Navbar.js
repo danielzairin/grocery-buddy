@@ -1,7 +1,6 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
-function Nav() {
+function Navbar() {
   return (
     <nav className="navbar navbar-expand navbar-light fixed-bottom bg-primary">
       <ul className="navbar-nav d-flex justify-content-around w-100">
@@ -25,4 +24,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default Navbar;

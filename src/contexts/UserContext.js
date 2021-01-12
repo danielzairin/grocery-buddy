@@ -1,5 +1,5 @@
 import { useEffect, createContext, useState } from "react";
-import firebase from ".././firebase/firebase";
+import firebase from "../firebase";
 
 export const UserContext = createContext();
 
@@ -15,14 +15,15 @@ export function UserContextProvider(props) {
         // No user is signed in
         firebase
           .auth()
-          .signInAnonymously()
-          .catch((error) => console.error(error));
+          .signInAnonymously();
       }
     });
   }, []);
 
   return (
-    <UserContext.Provider value={user}>{props.children}</UserContext.Provider>
+    <UserContext.Provider value={user}>
+      {props.children}
+    </UserContext.Provider>
   );
 }
 
