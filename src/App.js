@@ -16,6 +16,7 @@ function App() {
   const user = useContext(UserContext);
   const [groceryItems, setGroceryItems] = useState([]);
   const [pantryItems, setPantryItems] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     if (user) {
@@ -55,6 +56,22 @@ function App() {
     }
   }, [user]);
 
+  useEffect(() => {
+    if (pantryItems.length === 0) return;
+
+    const urlQuery = pantryItems
+      .filter((item) => item.daysUntilExpired > 0)
+      .map((item) => item.name)
+      .toString();
+
+    fetch(
+      `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${process.env.REACT_APP_API_KEY}&number=5&ranking=2&ingredients=${urlQuery}`
+    )
+      .then((response) => response.json())
+      .then((recipes) => setRecipes(recipes))
+      
+  }, [pantryItems]);
+
   async function addToCollection(data, collectionName) {
     return firebase
       .firestore()
@@ -91,7 +108,7 @@ function App() {
               />
             </Route>
             <Route path="/recipes">
-              <Recipes pantryItems={pantryItems} />
+              <Recipes recipes={recipes} />
             </Route>
             <Redirect to="/pantry" />
           </Switch>

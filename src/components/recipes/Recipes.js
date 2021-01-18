@@ -1,26 +1,7 @@
-import { useState, useEffect } from "react";
 import Header from "../Header";
 import RecipeCard from "./RecipeCard";
 
-function Recipes({ pantryItems }) {
-  const [recipes, setRecipes] = useState([]);
-
-  useEffect(() => {
-    if (pantryItems.length === 0) return;
-
-    const urlQuery = pantryItems
-      .filter((item) => item.daysUntilExpired > 0)
-      .map((item) => item.name)
-      .toString();
-
-    fetch(
-      `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${process.env.REACT_APP_API_KEY}&number=5&ranking=2&ingredients=${urlQuery}`
-    )
-      .then((response) => response.json())
-      .then((recipes) => setRecipes(recipes))
-      
-  }, [pantryItems]);
-
+function Recipes({ recipes }) {
   return (
     <div>
       <Header title="Recipes For You" />
@@ -35,7 +16,7 @@ function Recipes({ pantryItems }) {
         </div>
       ) : (
         <p className="text-center font-italic">
-          No recipes to be suggested, please add items to the pantry.
+          No recipes to be suggested, please add ingredients to the pantry.
         </p>
       )}
     </div>
