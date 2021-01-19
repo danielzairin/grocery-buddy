@@ -8,7 +8,7 @@ function SignInCard() {
   }
 
   return (
-    <Card background="danger">
+    <Card background="light">
       <p className="text-center">Sign-in to save your data!</p>
       <button
         className="btn btn-secondary btn-block"
