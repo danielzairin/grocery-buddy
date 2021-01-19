@@ -1,7 +1,7 @@
 import Header from "../Header";
 import RecipeCard from "./RecipeCard";
 
-function Recipes({ recipes }) {
+function Recipes({ recipes, addToCollection }) {
   return (
     <div>
       <Header title="Recipes For You" />
@@ -10,7 +10,7 @@ function Recipes({ recipes }) {
         <div className="card-deck row-cols-md-2 row-cols-lg-3">
           {recipes.map((recipe) => (
             <div key={recipe.id}>
-              <RecipeCard {...recipe} />
+              <RecipeCard {...recipe} addToCollection={addToCollection}/>
             </div>
           ))}
         </div>

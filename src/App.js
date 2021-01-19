@@ -68,8 +68,7 @@ function App() {
       `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${process.env.REACT_APP_API_KEY}&number=5&ranking=2&ingredients=${urlQuery}`
     )
       .then((response) => response.json())
-      .then((recipes) => setRecipes(recipes))
-      
+      .then((recipes) => setRecipes(recipes));
   }, [pantryItems]);
 
   async function addToCollection(data, collectionName) {
@@ -108,7 +107,7 @@ function App() {
               />
             </Route>
             <Route path="/recipes">
-              <Recipes recipes={recipes} />
+              <Recipes recipes={recipes} addToCollection={addToCollection} />
             </Route>
             <Redirect to="/pantry" />
           </Switch>
