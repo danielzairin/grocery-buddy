@@ -71,12 +71,15 @@ function RecipeCard({
             ))}
           </ul>
         ) : null}
-        <button
-          onClick={addMissingIngredients}
-          className="btn btn-secondary btn-block"
-        >
-          Add missing ingridients to grocery list
-        </button>
+
+        {missedIngredients.length > 0 ? (
+          <button
+            onClick={addMissingIngredients}
+            className="btn btn-secondary btn-block"
+          >
+            Add missing ingredients to grocery list
+          </button>
+        ) : null}
 
         <button
           onClick={() => openRecipeUrl(id)}
