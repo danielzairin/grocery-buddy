@@ -57,7 +57,10 @@ function App() {
   }, [user]);
 
   useEffect(() => {
-    if (pantryItems.length === 0) return;
+    if (pantryItems.length === 0) {
+      setRecipes([]);
+      return;
+    };
 
     const urlQuery = pantryItems
       .filter((item) => item.daysUntilExpired > 0)
